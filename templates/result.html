@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        #back {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        #back:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h1>{{ word }}</h1>
+<ul>
+    {%for word_type in word_types %}
+        <h3>{{ word_type }}</h3>
+
+        {%for meaning in meanings[word_type]%}
+            <li>{{ meaning }}</li>
+        {%endfor%}
+    {%endfor%}
+</ul>
+
+
+<a id="back" href="{{ url_for('index') }}">Back</a>
+</body>
+</html>

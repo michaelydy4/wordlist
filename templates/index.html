@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .word-search {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .word-search h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        #search input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .learning-list,
+        .mastered-list {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .learning-list h1,
+        .mastered-list h1 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .mastered-list input[type="text"] {
+            padding: 5px;
+            width: 200px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="word-search">
+    <h1>Word-search</h1>
+    <form id="search" action="{{ url_for('search') }}" method="post">
+        <input type="text" name="word" placeholder="Search meaning of word here">
+    </form>
+</div>
+
+<div class="learning-list">
+    <h1>Learning-list</h1>
+    <form id="learning-list" action="{{url_for('index')}}">
+        <div>
+            <ul>
+                {% for row in learnedRows %}
+                <li>
+                    <div>
+                        {{ row['word'] }}
+                        <div>
+                            <a href="{{ url_for('delete', word=row['word']) }}"><button class="delete-button">Delete</button></a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
+</div>
+
+<div class="mastered-list">
+    <h1>Mastered-list</h1>
+    <form id="mastered-list" action="{{url_for('index')}}">
+        <div>
+            <ul>
+                {% for row in masteredRows %}
+                <li>{{ row['word'] }}</li>
+                {% endfor %}
+            </ul>
+            <input type="text" name="learned-word" placeholder="Still learning this word?">
+        </div>
+    </form>
+</div>
+</body>
+</html>
